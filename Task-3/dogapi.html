@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Enter Breed" id="Dogname">
+    <button onclick="searchimg()">Search</button>
+    <br><br>
+    <img id="DogImg" width="200">
+    <script>
+        async function searchimg() {
+            try {
+                const Dogname =document.getElementById("Dogname").value;
+                 const response = await fetch(`https://dog.ceo/api/breed/${Dogname}/images/random`);
+                 if(!response.ok){
+                    throw new Error("Failed to fetch");
+                }
+                const Dog = await response.json();
+                document.getElementById("DogImg").src = Dog.message;
+            } catch (error) {
+                console.error("Error fetching image:", error);
+            }
+        }
+    </script>
+</body>
+</html>
